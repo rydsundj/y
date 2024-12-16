@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #2d2b2b;
+  --foreground: #2d2b2b;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #2d2b2b;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+
+
+.message-bubble {
+  background-color: #f9f9f9; 
+  border: 1px solid #ddd;
+  border-radius: 8px; 
+  padding: 10px; 
+  margin-bottom: 10px; 
+  position: relative;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+}
+
+.message-bubble strong {
+  display: block; 
+  font-weight: bold; 
+  margin-bottom: 4px; 
+}
+
+.message-bubble em {
+  font-size: 0.8em; 
+  color: #888; 
+  position: absolute;
+  bottom: 10px; 
+  right: 10px; 
+}
+
