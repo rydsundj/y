@@ -175,7 +175,7 @@ export const checkFriendship = async ({ loggedInUsername, profileUsername }) => 
 export const postMessage = async ({ name, message }) => {
   const token = localStorage.getItem('token');
   if (!token) {
-    throw new Error('Not authenticated');
+    throw new Error('Not authenticated', token);
   }
   
   if (!name) {
