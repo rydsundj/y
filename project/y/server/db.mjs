@@ -1,7 +1,35 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt'; // For password hashing
 import validator from 'validator'; 
-const mongoURI = 'mongodb://localhost:27017/y_db'; 
+//-------------------------------------------------
+//const { MongoClient, ServerApiVersion } = require('mongodb');
+
+import {MongoClient, ServerApiVersion} from "mongodb";
+const mongoURI = "mongodb+srv://oryjo:xav890@cluster0.huxxv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+const client = new MongoClient(mongoURI, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  }
+});
+async function run() {
+  try {
+    // Connect the client to the server	(optional starting in v4.7)
+    await client.connect();
+    // Send a ping to confirm a successful connection
+    await client.db("admin").command({ ping: 1 });
+    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+  }
+}
+run().catch(console.dir);
+
+
+//-------------------------------------------------
 
 
 //utilizes callback functions ().then() and .catch()) to handle the results of the mongoose.connect() operation. 
