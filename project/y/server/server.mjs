@@ -10,11 +10,13 @@ const port = 3005;
 app.use(helmet());
 
 const corsOptions = {
-    origin: `http://localhost:3000`,
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true, 
-  };
+  origin: process.env.NODE_ENV === 'production' 
+    ? 'https://y-br1anh7tb-olivers-projects-5d48027f.vercel.app'  
+    : 'http://localhost:3000',           
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+};
   
   app.use(cors(corsOptions));
 

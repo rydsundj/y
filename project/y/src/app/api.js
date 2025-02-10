@@ -1,7 +1,5 @@
 // api.js
-
-const port = 3005;
-const API_URL = `http://localhost:${port}`;
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3005";
 
 
 //USER STUFF
@@ -288,3 +286,4 @@ export const loadMessagesForUser = async (username) => {
 
 
 
+export default API_URL;
