@@ -1,6 +1,6 @@
 import request from 'supertest';
-import app from '../server.mjs'; // Adjust the path to your Express app module
-import { User, Message } from '../db.mjs'; // Import the User schema (adjust the path)
+import app from '../server.mjs'; 
+import { User, Message } from '../db.mjs'; 
 
 describe("API TESTS", () => {
 /* ################################################################ 
@@ -19,7 +19,7 @@ describe("User tests", function(){
     const userData = { username: "Matilda", email: "matilda@example.com", password: "password123" };
 
     request(app)
-        .post("/register") // Adjust to your actual registration endpoint
+        .post("/register") 
         .send(userData)
         .expect(200)
         .expect("Content-Type", /json/)
@@ -32,7 +32,7 @@ describe("User tests", function(){
   });
   it("registerUser: should return 400 if email already exists", (done) => {
     const userData = { username: "Matilda", email: "matilda@example.com", password: "password123" };
-    const duplicateUserData = { username: "Matilda2", email: "matilda@example.com", password: "password123" }; // Same email, different username
+    const duplicateUserData = { username: "Matilda2", email: "matilda@example.com", password: "password123" }; 
 
     request(app)
         .post("/register") 
@@ -66,7 +66,7 @@ describe("User tests", function(){
     const loginData = { email: "matilda@example.com", password: "password123" };
 
     await request(app)
-      .post("/login") // Adjust to your actual login endpoint
+      .post("/login") 
       .send(loginData)
       .expect(200)
       .expect("Content-Type", /json/)
@@ -83,7 +83,7 @@ describe("User tests", function(){
     const loginData = { email: "nonexistent@example.com", password: "password123" };
 
     await request(app)
-      .post("/login") // Adjust to your actual login endpoint
+      .post("/login") 
       .send(loginData)
       .expect(400)
       .expect("Content-Type", /json/)
@@ -102,7 +102,7 @@ describe("User tests", function(){
     const loginData = { email: "matilda@example.com", password: "wrongpassword" };
 
     await request(app)
-      .post("/login") // Adjust to your actual login endpoint
+      .post("/login")
       .send(loginData)
       .expect(400)
       .expect("Content-Type", /json/)
@@ -143,7 +143,7 @@ describe("Friend tests", function() {
     const user = new User({ username: "Matilda", email: "matilda@example.com", password: "password123" });
 
     await request(app)
-      .get("/search-users?q=doe") // Adjust to your actual search endpoint
+      .get("/search-users?q=doe") 
       .expect(200)
       .expect("Content-Type", /json/)
       .expect(res => {
@@ -161,7 +161,7 @@ describe("Friend tests", function() {
   it("searchUsers: It should return 400: Search query is required", async () => {
 
   await request(app)
-    .get("/search-users?q=") // Adjust to your actual search endpoint
+    .get("/search-users?q=") 
     .expect(400)
     .expect("Content-Type", /json/)
     .expect(res => {
@@ -173,7 +173,7 @@ describe("Friend tests", function() {
   it("searchUsers: It should return 404: no users found", async () => {
 
   await request(app)
-    .get("/search-users?q=karl") // Adjust to your actual search endpoint
+    .get("/search-users?q=karl") 
     .expect(404)
     .expect("Content-Type", /json/)
     .expect(res => {
@@ -191,7 +191,7 @@ describe("Friend tests", function() {
     };
 
     await request(app)
-        .post("/send-friend-request") // Adjust to your actual friend request endpoint
+        .post("/send-friend-request") 
         .send(friendRequestData)
         .expect(200)
         .expect("Content-Type", /json/)
@@ -219,7 +219,7 @@ describe("Friend tests", function() {
     };
 
     await request(app)
-        .post("/send-friend-request") // Adjust to your actual friend request endpoint
+        .post("/send-friend-request")
         .send(friendRequestData)
         .expect(404)
         .expect("Content-Type", /json/)
@@ -270,7 +270,7 @@ describe("Friend tests", function() {
     const username = "jane_doe";
 
     await request(app)
-      .get(`/fetch-friend-request?username=${username}`) // Adjust to your actual endpoint
+      .get(`/fetch-friend-request?username=${username}`) 
       .expect(200)
       .expect("Content-Type", /json/)
       .expect(res => {
@@ -285,7 +285,7 @@ describe("Friend tests", function() {
 
   it("fetchFriendRequest: it should return 400: Username is required", async () => {
   await request(app)
-    .get(`/fetch-friend-request`) // Adjust to your actual endpoint
+    .get(`/fetch-friend-request`) 
     .expect(400)
     .expect("Content-Type", /json/)
     .expect(res => {
@@ -305,7 +305,7 @@ describe("Friend tests", function() {
   
     // Make the request to fetch the friend request for a non-existent user
     await request(app)
-      .get(`/fetch-friend-request?username=${username}`) // Adjust to your actual endpoint
+      .get(`/fetch-friend-request?username=${username}`)
       .expect(404)
       .expect("Content-Type", /json/)
       .expect(res => {
@@ -332,7 +332,7 @@ describe("Friend tests", function() {
     };
   
     await request(app)
-      .patch("/accept-friend-request") // Adjust to your actual endpoint
+      .patch("/accept-friend-request") 
       .send(acceptData)
       .expect(200)
       .expect("Content-Type", /json/)
@@ -371,7 +371,7 @@ it("acceptFriendRequest: should return 404, user not found", async () => {
   };
 
   await request(app)
-    .patch("/accept-friend-request") // Adjust to your actual endpoint
+    .patch("/accept-friend-request") 
     .send(acceptData)
     .expect(404)
     .expect("Content-Type", /json/)
@@ -391,7 +391,7 @@ it("acceptFriendRequest: should return 400, no friend request found", async () =
   };
 
   await request(app)
-    .patch("/accept-friend-request") // Adjust to your actual endpoint
+    .patch("/accept-friend-request") 
     .send(acceptData)
     .expect(400)
     .expect("Content-Type", /json/)
@@ -408,7 +408,7 @@ it("acceptFriendRequest: should return 400, no friend request found", async () =
 
   it("fetchFriends: should fetch friends for a given user and return 200", async () => {
     await request(app)
-      .get("/fetch-friends?username=john_doe") // Adjust to your actual fetch friends endpoint
+      .get("/fetch-friends?username=john_doe") 
       .expect(200)
       .expect("Content-Type", /json/)
       .expect(res => {
@@ -427,7 +427,7 @@ it("acceptFriendRequest: should return 400, no friend request found", async () =
 
   it("fetchFriends: should return 400, username is required", async () => {
     await request(app)
-      .get("/fetch-friends") // Adjust to your actual fetch friends endpoint
+      .get("/fetch-friends") 
       .expect(400)
       .expect("Content-Type", /json/)
       .expect(res => {
@@ -440,7 +440,7 @@ it("acceptFriendRequest: should return 400, no friend request found", async () =
 
   it("fetchFriends: should return 404, user not found", async () => {
     await request(app)
-      .get("/fetch-friends?username=mat") // Adjust to your actual fetch friends endpoint
+      .get("/fetch-friends?username=mat") 
       .expect(404)
       .expect("Content-Type", /json/)
       .expect(res => {
@@ -585,8 +585,8 @@ it("getMessagesByUsername: should return 200 and a list of messages for a given 
   const username = "john_doe";
 
   await request(app)
-    .get(`/messages?username=${username}`) // Adjust to your actual endpoint
-    .set('Authorization', `Bearer ${authToken}`) // Add the token to the request
+    .get(`/messages?username=${username}`) 
+    .set('Authorization', `Bearer ${authToken}`) 
     .expect(200)
     .expect("Content-Type", /json/)
     .expect(res => {
@@ -600,8 +600,8 @@ it("getMessagesByUsername: should return 200 and a list of messages for a given 
 /* #########################  ERROR GET MESSAGE BY USERNAME   ######################### */
 it("getMessagesByUsername: should return 400, username is required", async () => {
   await request(app)
-    .get("/messages") // Adjust to your actual endpoint
-    .set('Authorization', `Bearer ${authToken}`) // Add the token to the request
+    .get("/messages")
+    .set('Authorization', `Bearer ${authToken}`) 
     .expect(400)
     .expect("Content-Type", /json/)
     .expect(res => {
@@ -615,7 +615,7 @@ it("getMessagesByUsername: should return 404, no messages found for this user", 
   const username = "isak"; // This user should not have any messages in the test database
 
   await request(app)
-    .get(`/messages?username=${username}`) // Adjust to your actual endpoint
+    .get(`/messages?username=${username}`) 
     .set('Authorization', `Bearer ${authToken}`) // Add the token to the request
     .expect(404)
     .expect("Content-Type", /json/)
@@ -638,7 +638,7 @@ it("postFriendMessage: should post a friend message and return 200", async () =>
   };
 
   await request(app)
-    .post("/send-friend-message") // Adjust to your actual endpoint
+    .post("/send-friend-message")
     .set('Authorization', `Bearer ${authToken}`) // Add the token to the request
     .send(messageData)
     .expect(200)
@@ -665,7 +665,7 @@ it("postFriendMessage: should return 400 if sender, recipient or message is miss
 
   await request(app)
     .post("/send-friend-message")
-    .set('Authorization', `Bearer ${authToken}`) // Add the token to the request
+    .set('Authorization', `Bearer ${authToken}`)
     .send(messageData)
     .expect(400)
     .expect("Content-Type", /json/)
@@ -687,8 +687,8 @@ it("postFriendMessage: should return 400 if message is too long", async () => {
   };
 
   await request(app)
-    .post("/send-friend-message") // Adjust to your actual endpoint
-    .set('Authorization', `Bearer ${authToken}`) // Add the token to the request
+    .post("/send-friend-message") 
+    .set('Authorization', `Bearer ${authToken}`) 
     .send(messageData)
     .expect(400)
     .expect("Content-Type", /json/)
@@ -709,7 +709,7 @@ it("postFriendMessage: should sanitize the message to prevent XSS", async () => 
   };
 
   const res = await request(app)
-    .post("/send-friend-message") // Adjust to your actual endpoint
+    .post("/send-friend-message") 
     .set('Authorization', `Bearer ${authToken}`) // Add the token to the request
     .send(messageData)
     .expect(200)

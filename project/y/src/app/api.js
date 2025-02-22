@@ -1,7 +1,9 @@
 // api.js
 
 const port = 3005;
-const API_URL = `http://localhost:${port}`;
+const API_URL = process.env.NODE_ENV === 'production' 
+  ? 'https://y-production-e9e3.up.railway.app/'
+  : `http://localhost:${port}`;
 
 
 //USER STUFF
