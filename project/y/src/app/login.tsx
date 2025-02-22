@@ -1,61 +1,53 @@
-// src/app/components/Login.tsx
-
 import { useState } from "react";
 import { loginUser, registerUser } from "./api";
-import { sha256 } from 'crypto-hash';
 
-
-//makes sure the Login component gets the correct data and functions
+// makes sure the Login component gets the correct data and functions
 interface LoginProps {
   isLogin: boolean;
   toggleLogin: () => void;
   setIsLoggedIn: (value: boolean) => void; 
 }
 
-//collects user input, handles login/sign-up logic, and passes login status back
+// collects user input, handles login/sign-up logic, and passes login status back
 export default function Login({ isLogin, toggleLogin, setIsLoggedIn }: LoginProps) {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-
-  //when submitted
+  // when submitted
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
-        if (!isLogin) {
-            const isValidUsername = /^[^\s]+$/.test(username); 
-            if (!isValidUsername) {
-                setError("Username cannot contain spaces");
-                return;
-            }
-
-            // Hash the password using SHA-256
-            //const hashedPassword = await sha256(password);
-            await registerUser(username, email, password); 
-            setIsLoggedIn(true); 
-            localStorage.setItem('username', username); 
-        } else {
-            // Hash the password for login
-            //const hashedPassword = await sha256(password);
-            const userData = await loginUser(email, password); 
-
-            // Check if userData is returned successfully
-            if (userData && userData.user) { 
-                setIsLoggedIn(true);
-                localStorage.setItem('username', userData.user.username); 
-            } else {
-                setError("Login failed: No user data returned.");
-            }
+      if (!isLogin) {
+        const isValidUsername = /^[^\s]+$/.test(username); 
+        if (!isValidUsername) {
+          setError("Username cannot contain spaces");
+          return;
         }
-    } catch (error) {
-        setError("An error occurred during login/registration.");
-        console.error(error);
-    }
-};
 
+        // Register the user without hashing the password
+        await registerUser(username, email, password); 
+        setIsLoggedIn(true); 
+        localStorage.setItem('username', username); 
+      } else {
+        // Login the user without hashing the password
+        const userData = await loginUser(email, password); 
+
+        // Check if userData is returned successfully
+        if (userData && userData.user) { 
+          setIsLoggedIn(true);
+          localStorage.setItem('username', userData.user.username); 
+        } else {
+          setError("Login failed: No user data returned.");
+        }
+      }
+    } catch (error) {
+      setError("An error occurred during login/registration.");
+      console.error(error);
+    }
+  };
 
   return (
     <>

@@ -2,7 +2,7 @@
 import "../../globals.css"; 
 import Navbar from '../../components/design/navbar'; 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+//import { useRouter } from "next/navigation";
 import { useParams } from "next/navigation"; 
 import { loadMessagesForUser, sendFriendRequest, checkFriendship, postFriendMessage } from '../../api'; 
 import Button from "../../components/design/button";
@@ -16,7 +16,7 @@ interface Message {
 }
 
 export default function UserProfile() {
-  const router = useRouter();
+  //const router = useRouter();
   const { username } = useParams(); 
   const [isFriendRequestSent, setIsFriendRequestSent] = useState(false); 
   const [isFriends, setIsFriends] = useState(false); 
