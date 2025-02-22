@@ -33,14 +33,14 @@ export default function Login({ isLogin, toggleLogin, setIsLoggedIn }: LoginProp
             }
 
             // Hash the password using SHA-256
-            const hashedPassword = await sha256(password);
-            await registerUser(username, email, hashedPassword); 
+            //const hashedPassword = await sha256(password);
+            await registerUser(username, email, password); 
             setIsLoggedIn(true); 
             localStorage.setItem('username', username); 
         } else {
             // Hash the password for login
-            const hashedPassword = await sha256(password);
-            const userData = await loginUser(email, hashedPassword); 
+            //const hashedPassword = await sha256(password);
+            const userData = await loginUser(email, password); 
 
             // Check if userData is returned successfully
             if (userData && userData.user) { 

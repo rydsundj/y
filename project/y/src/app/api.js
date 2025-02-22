@@ -1,5 +1,7 @@
 // api.js
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3005";
+
+const port = 3005;
+const API_URL = `http://localhost:${port}`;
 
 
 //USER STUFF
@@ -14,7 +16,7 @@ export const registerUser = async (username, email, password) => {
     if (!response.ok) {
       throw new Error('API: Registration failed');
     }
-    return await response.json(); 
+    return await response.json();
   };
   
   export const loginUser = async (email, password) => {
@@ -173,7 +175,7 @@ export const checkFriendship = async ({ loggedInUsername, profileUsername }) => 
 export const postMessage = async ({ name, message }) => {
   const token = localStorage.getItem('token');
   if (!token) {
-    throw new Error('Not authenticated', token);
+    throw new Error('Not authenticated');
   }
   
   if (!name) {
@@ -286,4 +288,3 @@ export const loadMessagesForUser = async (username) => {
 
 
 
-export default API_URL;
