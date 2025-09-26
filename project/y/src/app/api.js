@@ -6,7 +6,7 @@ const API_URL = process.env.NODE_ENV === 'production'
   : `http://localhost:${port}`;
 
 
-  
+
 //USER STUFF
 export const registerUser = async (username, email, password) => {
     const response = await fetch(`${API_URL}/register`, {
@@ -16,6 +16,7 @@ export const registerUser = async (username, email, password) => {
       },
       body: JSON.stringify({ username, email, password }),
     });
+    
     if (!response.ok) {
       throw new Error('API: Registration failed');
     }
