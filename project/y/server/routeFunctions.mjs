@@ -20,6 +20,7 @@ const verifyToken = (req, res, next) => {
     }
   };
 
+  
 
 // Function to find a user by email
 const registerUser = async (req, res) => {
