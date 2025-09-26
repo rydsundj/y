@@ -2,7 +2,7 @@
 
 const port = 3005;
 const API_URL = process.env.NODE_ENV === 'production' 
-  ? 'https://y-production-e9e3.up.railway.app/'
+  ? 'https://y-production-e9e3.up.railway.app'
   : `http://localhost:${port}`;
 
 
