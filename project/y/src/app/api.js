@@ -6,6 +6,7 @@ const API_URL = process.env.NODE_ENV === 'production'
   : `http://localhost:${port}`;
 
 
+  
 //USER STUFF
 export const registerUser = async (username, email, password) => {
     const response = await fetch(`${API_URL}/register`, {
