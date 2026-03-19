@@ -5,7 +5,7 @@ import validator from 'validator';
 //const { MongoClient, ServerApiVersion } = require('mongodb');
 
 import {MongoClient, ServerApiVersion} from "mongodb";
-const mongoURI = "mongodb+srv://oryjo:xav890@cluster0.huxxv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const mongoURI = //
 const client = new MongoClient(mongoURI, {
   serverApi: {
     version: ServerApiVersion.v1,
